@@ -23,7 +23,7 @@ UTF-8 support (emojis!):
 Simple and effective
 
 Shamelessly based on sent
-suckless.org/sent
+tools.suckless.org/sent
 
 Questions?
 github.com/prodhe/slides
