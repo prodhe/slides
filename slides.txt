@@ -1,0 +1,29 @@
+slides
+
+Example
+
+This is a slideshow
+
+Every paragraph is a new slide:
+- Centered
+- Fullscreen
+- Scaled
+
+It uses the web browser for presentation
+- HTML
+- CSS
+- JS
+
+UTF-8 support (emojis!):
+😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏
+😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟
+😠😡😢😣😥😦😧😨😩😪😫😭😮😯😰😱
+😲😳😴😵😶😷😸😹😺😻😼😽😾😿🙀☠
+
+Simple and effective
+
+Shamelessly based on sent
+suckless.org/sent
+
+Questions?
+github.com/prodhe/slides
