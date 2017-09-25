@@ -81,7 +81,7 @@ p {
 	font-size: 24pt;
 	font-family: monospace;
 	line-height: 1.7;
-	text-align: center;
+	text-align: left;
 }
 </style>`
 
