@@ -74,7 +74,7 @@ func toHtml(data string) string {
 `
 
 	style := `<style type="text/css">
-* { border: 0; margin: 0; padding: 0; }
+* { border: 0; margin: 0; padding: 0; box-sizing: border-box; }
 body { background-color: #ffffea; }
 p {
 	width: 100vw;
@@ -86,6 +86,7 @@ p {
 	font-family: monospace;
 	line-height: 1.7;
 	text-align: left;
+	padding: 1em;
 }
 </style>`
 
