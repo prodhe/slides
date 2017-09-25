@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"net/http"
 	"os"
@@ -22,13 +23,23 @@ type Token struct {
 }
 
 func main() {
+	flag.Parse()
+
 	ch := make(chan Token)
 	out := make(chan string)
 
 	var f *os.File
-	f, err := os.Open("slides.txt")
-	if err != nil {
+	var err error
+
+	if flag.NArg() < 1 || flag.Arg(0) == "-" {
 		f = os.Stdin
+	} else {
+		path := flag.Arg(0)
+		f, err = os.Open(path)
+		if err != nil {
+			fmt.Printf("%s: %v\n", path, err)
+			os.Exit(1)
+		}
 	}
 
 	go parse(ch, out)
@@ -43,6 +54,7 @@ func main() {
 	data := <-out
 
 	http.Handle("/", slides(toHtml(data)))
+	fmt.Println("Slides are available at http://localhost:3001/")
 	err = http.ListenAndServe(":3001", nil)
 	if err != nil {
 		fmt.Println(err)
