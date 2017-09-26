@@ -10,7 +10,7 @@ Paragraphs (multiple newlines) separates slides.
 
 Lines beginning with `#` is a comment.
 
-See slides.txt.
+See example.txt.
 
 ### On-going
 
