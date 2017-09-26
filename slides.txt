@@ -9,6 +9,9 @@ Every paragraph is a new slide:
 - Fullscreen
 - Scaled
 
+
+
+
 It uses the web browser for presentation
 - HTML
 - CSS
@@ -27,6 +30,6 @@ Simple and effective
 Shamelessly based on sent
 tools.suckless.org/sent
 
-Questions?
-# comment: I hope not...
+Questions? # inline comment is plain text
+#      I hope not...
 github.com/prodhe/slides
