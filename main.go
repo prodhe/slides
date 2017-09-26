@@ -68,7 +68,9 @@ func toHtml(data string) string {
 {{style}}
 </head>
 <body>
+<div id="slides">
 {{data}}
+</div>
 </body>
 </html>
 `
@@ -76,7 +78,12 @@ func toHtml(data string) string {
 	style := `<style type="text/css">
 * { border: 0; margin: 0; padding: 0; box-sizing: border-box; }
 body { background-color: #ffffea; }
+#slides {
+	display: flex;
+	flex-flow: row nowrap;
+}
 p {
+	flex: none;
 	width: 100vw;
 	height: 100vh;
 	display: flex;
