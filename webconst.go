@@ -59,7 +59,7 @@ function currentSlide(n) {
 
 function showSlides(n) {
   var i;
-  var slides = document.getElementsByClassName("slide");
+  var slides = document.getElementsByTagName("p");
 //  var dots = document.getElementsByClassName("dot");
   if (n > slides.length-1) {slideIndex = 0} 
   if (n < 0) {slideIndex = slides.length-1}
@@ -76,5 +76,20 @@ function showSlides(n) {
   slides[slideIndex].style.display = "flex"; 
 //  dots[slideIndex].className += " active";
 }
+
+window.onkeydown = function (e) {
+  var e=window.event || e;
+  // left, up, right, down: 37 38 39 40
+  switch (e.keyCode) {
+    case 37:
+    case 38:
+      plusSlides(-1);
+      break;
+    case 39:
+    case 40:
+      plusSlides(1);
+      break;
+  }  
+};
 `
 )
