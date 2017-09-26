@@ -7,17 +7,13 @@ This is a slideshow
 Every paragraph is a new slide:
 - Centered
 - Fullscreen
-- Scaled
-
-
-
 
 It uses the web browser for presentation
 - HTML
 - CSS
 - JS
 
-# this is a comment
+# This is a comment and will not be shown
 
 UTF-8 support (emojis!):
 😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏
@@ -30,6 +26,5 @@ Simple and effective
 Shamelessly based on sent
 tools.suckless.org/sent
 
-Questions? # inline comment is plain text
-#      I hope not...
+Questions?
 github.com/prodhe/slides
