@@ -61,43 +61,11 @@ func slides(data string) http.Handler {
 }
 
 func toHtml(data string) string {
-	result := `<!doctype html>
-<html>
-<head>
-<title>Slides</title>
-{{style}}
-</head>
-<body>
-<div id="slides">
-{{data}}
-</div>
-</body>
-</html>
-`
+	result := HTML_TMPL
 
-	style := `<style type="text/css">
-* { border: 0; margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: #ffffea; }
-#slides {
-	display: flex;
-	flex-flow: row nowrap;
-}
-p {
-	flex: none;
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 24pt;
-	font-family: monospace;
-	line-height: 1.7;
-	text-align: left;
-	padding: 1em;
-}
-</style>`
+	result = strings.Replace(result, "{{style}}", STYLESHEET, -1)
+	result = strings.Replace(result, "{{javascript}}", JAVASCRIPT, -1)
 
-	result = strings.Replace(result, "{{style}}", style, -1)
 	result = strings.Replace(result, "{{data}}", data, -1)
 
 	return result
