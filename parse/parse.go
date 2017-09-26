@@ -15,7 +15,7 @@ func (p *Parser) Parse() (string, error) {
 	str := "<p>\n"
 	for {
 		tok := p.l.nextToken()
-		//		fmt.Printf("%q\n", tok)
+		//fmt.Printf("%s\n", tok)
 		switch tok.typ {
 		case tokenEOF:
 			str += "</p>\n"
@@ -26,12 +26,14 @@ func (p *Parser) Parse() (string, error) {
 				tok.line,
 				tok.val,
 			)
-		case tokenParagraph:
+		case tokenParagraphDelim:
 			str += fmt.Sprintf("\n</p>\n<p>\n")
 		case tokenNewline:
 			str += fmt.Sprintf("<br>\n")
 		case tokenText:
 			str += tok.val
+		case tokenComment:
+			str += fmt.Sprintf("<!-- %s //-->\n", tok.val)
 		}
 	}
 

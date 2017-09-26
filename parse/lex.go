@@ -11,11 +11,11 @@ type tokenType int
 const (
 	tokenError tokenType = iota
 	tokenEOF
-	tokenComment   // begin with '#' until '\n'; value is whatever is between
-	tokenImage     // begin with '@' until '\n'; value is whatever is between
-	tokenText      // plain text
-	tokenNewline   // '\n'
-	tokenParagraph // equals 2*newline
+	tokenComment        // '#'
+	tokenImage          // '@'
+	tokenText           // plain text
+	tokenNewline        // '\n'
+	tokenParagraphDelim // 2 * '\n'
 )
 
 const eof = -1 // used for marking error in rune reading
@@ -34,8 +34,10 @@ func (t token) String() string {
 		return "EOF"
 	case t.typ == tokenError:
 		return t.val
+	case len(t.val) > 20:
+		return fmt.Sprintf("%.20q...", t.val)
 	}
-	return fmt.Sprintf("%d: %s", t.typ, t.val)
+	return fmt.Sprintf("%q", t.val)
 }
 
 // lexer holds the state of the scanner. Yes, this is Rob Pike-inspired deluxe.
@@ -55,7 +57,7 @@ type stateFn func(l *lexer) stateFn
 
 // run loops through states until some state function returns nil.
 func (l *lexer) run() {
-	for l.state = lexText; l.state != nil; {
+	for l.state = lexChar; l.state != nil; {
 		l.state = l.state(l)
 	}
 	close(l.tokens)
@@ -94,8 +96,7 @@ func (l *lexer) backup() {
 
 // emit sends away a confirmed token.
 func (l *lexer) emit(tok tokenType) {
-	properline := l.line - strings.Count(l.input[l.start:l.pos], "\n")
-	l.tokens <- token{tok, l.start, l.input[l.start:l.pos], properline}
+	l.tokens <- token{tok, l.start, l.input[l.start:l.pos], l.line}
 	l.start = l.pos
 }
 
@@ -104,12 +105,31 @@ func (l *lexer) ignore() {
 	l.start = l.pos
 }
 
+// accept consumes the next rune if it's from the valid set.
+func (l *lexer) accept(valid string) bool {
+	if strings.ContainsRune(valid, l.next()) {
+		return true
+	}
+	l.backup()
+	return false
+}
+
+// acceptRun consumes a run of runes from the valid set.
+func (l *lexer) acceptRun(valid string) {
+	for strings.ContainsRune(valid, l.next()) {
+	}
+	l.backup()
+}
+
+// nextToken returns next token from the channel.
+// This is only used by the parser.
 func (l *lexer) nextToken() token {
 	token := <-l.tokens
 	l.lastPos = l.pos
 	return token
 }
 
+// errorf returns a tokenized error with value containing the error message.
 func (l *lexer) errorf(format string, args ...interface{}) stateFn {
 	l.tokens <- token{tokenError, l.start, fmt.Sprintf(format, args...), l.line}
 	return nil
@@ -132,16 +152,18 @@ func lex(name, input string) *lexer {
 
 // state functions
 
-func lexText(l *lexer) stateFn {
+// lexChar is the default state.
+func lexChar(l *lexer) stateFn {
 	l.width = 0
 	switch r := l.next(); {
 	case r == eof:
 		break
 	case r == '\n':
-		l.backup()
-		l.emit(tokenText)
 		return lexNewline
+	case r == '#':
+		return lexComment
 	default:
+		// everything else is just text
 		return lexText
 	}
 	// reached eof
@@ -149,22 +171,50 @@ func lexText(l *lexer) stateFn {
 		l.emit(tokenText)
 	}
 	l.emit(tokenEOF)
+
+	// returning nil will end the state machine
 	return nil
 }
 
+// lexText absorbs unrecognized characters up until, but not including, a newline
+func lexText(l *lexer) stateFn {
+	for isText(l.peek()) {
+		l.next()
+	}
+	l.emit(tokenText)
+	return lexChar
+}
+
+// isText returns true if rune is neither EOF nor newline.
+func isText(r rune) bool {
+	return r != eof && r != '\n'
+}
+
+// lexNewline returns either a tokenNewline or tokenParagraphDelim, based on number of newlines found.
+// One newline is already consumed.
 func lexNewline(l *lexer) stateFn {
-	_ = l.next() // we know this will be an \n
-	if l.peek() == '\n' {
-		// twice! it is a paragraph.
-		for {
-			if l.next() != '\n' {
-				l.backup()
-				break
-			}
-		}
-		l.emit(tokenParagraph)
+	if l.accept("\n") {
+		// twice! it is a paragraph. absorp more newlines if possible.
+		l.acceptRun("\n")
+		l.emit(tokenParagraphDelim)
 	} else {
 		l.emit(tokenNewline)
 	}
-	return lexText
+	return lexChar
+}
+
+func lexComment(l *lexer) stateFn {
+	// ignore the comment marker and optional whitespace
+	l.acceptRun(" \t")
+	l.ignore()
+
+	for isText(l.peek()) {
+		l.next()
+	}
+	l.emit(tokenComment)
+
+	l.acceptRun("\n")
+	l.ignore()
+
+	return lexChar
 }
