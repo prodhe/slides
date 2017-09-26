@@ -12,7 +12,7 @@ func NewParser(name, input string) *Parser {
 }
 
 func (p *Parser) Parse() (string, error) {
-	str := "<p>\n"
+	str := "<p class=\"slide\">\n"
 	for {
 		tok := p.l.nextToken()
 		//fmt.Printf("%s\n", tok)
@@ -27,7 +27,7 @@ func (p *Parser) Parse() (string, error) {
 				tok.val,
 			)
 		case tokenParagraphDelim:
-			str += fmt.Sprintf("\n</p>\n<p>\n")
+			str += fmt.Sprintf("\n</p>\n<p class=\"slide\">\n")
 		case tokenNewline:
 			str += fmt.Sprintf("<br>\n")
 		case tokenText:
