@@ -78,12 +78,13 @@ function showSlides(n) {
 
 window.onkeydown = function (e) {
   var e=window.event || e;
-  // left, up, right, down: 37 38 39 40
+  // space, left, up, right, down: 32 37 38 39 40
   switch (e.keyCode) {
     case 37:
     case 38:
       plusSlides(-1);
       break;
+    case 32:
     case 39:
     case 40:
       plusSlides(1);
