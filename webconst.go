@@ -71,8 +71,8 @@ function showSlides(n) {
 //  for (i = 0; i < dots.length; i++) {
 //      dots[i].className = dots[i].className.replace(" active", "");
 //  }
-  console.log(slideIndex);
-  slides[slideIndex].style.display = "flex"; 
+  slides[slideIndex].classList.add("current");
+
 //  dots[slideIndex].className += " active";
 }
 
