@@ -8,12 +8,16 @@ This is pretty much a clone of *sent* from suckless.org (https://tools.suckless.
 
 Paragraphs (multiple newlines) separates slides.
 
-Lines beginning with `#` is a comment.
+Lines beginning with `#` is a comment and will not show up in the final slide.
+
+Include images using '@'.
+
+Escape special characters at the beginning of line using '\'.
+
+Blanks (spaces and tabs) at the beginning if a line will be preserved. Tabs equals four spaces.
 
 See example.txt.
 
 ### On-going
-
-Include images using `@`.
 
 Include external text file using `.`.

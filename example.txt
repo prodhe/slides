@@ -2,20 +2,34 @@ slides
 
 Example
 
-This is a slideshow
+Every paragraph is a new slide
 
-Every paragraph is a new slide:
-- Centered
-- Fullscreen
+- Monospaced
+- Block centered
+- Blanks at the beginning of a
+  line will be preserved
 
-It uses the web browser for presentation
-- HTML
-- CSS
-- JS
+Indent if you like:
+	A tab
+		equals
+	four spaces
 
-# This is a comment and will not be shown
+Special characters
+	# comment
+	@image.png
 
-UTF-8 support (emojis!):
+Escape with \
+	\# comment
+	\@image.png
+
+Include images using @name.png
+
+@r2d2_1.png
+
+<b>HTML tags are escaped</b>
+
+UTF-8 support (emojis!)
+
 😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏
 😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟
 😠😡😢😣😥😦😧😨😩😪😫😭😮😯😰😱
@@ -27,4 +41,5 @@ Shamelessly based on sent
 tools.suckless.org/sent
 
 Questions?
+
 github.com/prodhe/slides
