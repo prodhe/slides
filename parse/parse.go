@@ -37,6 +37,8 @@ func (p *Parser) Parse() (string, error) {
 			str += toHtml(tok.val)
 		case tokenComment:
 			str += fmt.Sprintf("<!-- %s //-->\n", tok.val)
+		case tokenImage:
+			str += fmt.Sprintf("<img src=\"/f/%s\">", tok.val)
 		}
 	}
 

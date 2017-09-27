@@ -162,6 +162,11 @@ func lexChar(l *lexer) stateFn {
 		return lexNewline
 	case r == '#':
 		return lexComment
+	case r == '@':
+		return lexImage
+	case r == '\\':
+		l.ignore()
+		return lexText
 	default:
 		// everything else is just text
 		return lexText
@@ -215,6 +220,18 @@ func lexComment(l *lexer) stateFn {
 
 	l.acceptRun("\n")
 	l.ignore()
+
+	return lexChar
+}
+
+func lexImage(l *lexer) stateFn {
+	// ignore the marker
+	l.ignore()
+
+	for isText(l.peek()) {
+		l.next()
+	}
+	l.emit(tokenImage)
 
 	return lexChar
 }

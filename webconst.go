@@ -43,6 +43,12 @@ p {
 .current {
 	display: flex;
 }
+img {
+	display: block;
+	position: relative;
+	max-width: 100vw;
+	max-height: 100vh;
+}
 `
 	JAVASCRIPT = `
 var slideIndex = 0;
