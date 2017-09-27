@@ -45,6 +45,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	http.Handle("/f/", http.StripPrefix("/f/", http.FileServer(http.Dir("./"))))
 	http.Handle("/", slides(toHtml(data)))
 	fmt.Println("Slides are available at http://localhost:3001/")
 	err = http.ListenAndServe(":3001", nil)
