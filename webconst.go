@@ -28,10 +28,10 @@ body { background-color: #ffffea; }
 	flex-flow: row nowrap;
 }
 p {
+	display: none;
 	flex: none;
 	width: 100vw;
 	height: 100vh;
-	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 24pt;
@@ -40,9 +40,8 @@ p {
 	text-align: left;
 	padding: 1em;
 }
-
-.slide {
-	display: none;
+.current {
+	display: flex;
 }
 `
 	JAVASCRIPT = `
@@ -64,7 +63,7 @@ function showSlides(n) {
   if (n > slides.length-1) {slideIndex = slides.length-1} 
   if (n < 0) {slideIndex = 0}
   for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none"; 
+      slides[i].classList.remove("current");
       slides[i].onclick = function (){
         plusSlides(1);
       };
