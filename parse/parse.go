@@ -1,6 +1,9 @@
 package parse
 
-import "fmt"
+import (
+	"fmt"
+	"html"
+)
 
 type Parser struct {
 	l *lexer
@@ -31,7 +34,7 @@ func (p *Parser) Parse() (string, error) {
 		case tokenNewline:
 			str += fmt.Sprintf("<br>\n")
 		case tokenText:
-			str += tok.val
+			str += toHtml(tok.val)
 		case tokenComment:
 			str += fmt.Sprintf("<!-- %s //-->\n", tok.val)
 		}
@@ -40,4 +43,22 @@ func (p *Parser) Parse() (string, error) {
 	str += "</p>"
 
 	return str, nil
+}
+
+func toHtml(s string) string {
+	var result string
+	s = html.EscapeString(s)
+Loop:
+	for i := 0; i < len(s); i++ {
+		switch s[i] {
+		case ' ':
+			result += "&nbsp;"
+		case '\t':
+			result += "&nbsp;&nbsp;&nbsp;&nbsp;"
+		default:
+			result += s[i:]
+			break Loop
+		}
+	}
+	return result
 }
