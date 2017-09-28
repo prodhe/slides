@@ -74,7 +74,6 @@ function currentSlide(n) {
 function showSlides(n) {
   var i;
   var slides = document.getElementsByTagName("section");
-//  var dots = document.getElementsByClassName("dot");
   if (n > slides.length-1) {slideIndex = slides.length-1} 
   if (n < 0) {slideIndex = 0}
   for (i = 0; i < slides.length; i++) {
@@ -83,12 +82,7 @@ function showSlides(n) {
         plusSlides(1);
       };
   }
-//  for (i = 0; i < dots.length; i++) {
-//      dots[i].className = dots[i].className.replace(" active", "");
-//  }
   slides[slideIndex].classList.add("current");
-
-//  dots[slideIndex].className += " active";
 }
 
 window.onkeydown = function (e) {
