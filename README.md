@@ -43,6 +43,8 @@ Keyboard shortcuts:
 
 `Left`/`Up` moves to the previous slide.
 
+`f` cycles through current font: monospace, sans-serif and serif.
+
 ## Syntax
 
 - Paragraphs (multiple newlines: `\n\n`) separates slides.
