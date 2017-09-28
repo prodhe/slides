@@ -61,7 +61,19 @@ img {
 `
 	JAVASCRIPT = `
 var slideIndex = 0;
+
+initSlides();
 showSlides(slideIndex);
+
+function initSlides() {
+  var i;
+  var slides = document.getElementsByTagName("section");
+  for (i = 0; i < slides.length; i++) {
+      slides[i].onclick = function (){
+        plusSlides(1);
+      };
+  }
+}
 
 function plusSlides(n) {
   showSlides(slideIndex += n);
@@ -74,13 +86,12 @@ function currentSlide(n) {
 function showSlides(n) {
   var i;
   var slides = document.getElementsByTagName("section");
-  if (n > slides.length-1) {slideIndex = slides.length-1} 
-  if (n < 0) {slideIndex = 0}
+
+  if (n > slides.length-1) { slideIndex = slides.length-1; }
+  if (n < 0) { slideIndex = 0; }
+
   for (i = 0; i < slides.length; i++) {
-      slides[i].classList.remove("current");
-      slides[i].onclick = function (){
-        plusSlides(1);
-      };
+    slides[i].classList.remove("current");
   }
   slides[slideIndex].classList.add("current");
 }
