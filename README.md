@@ -26,7 +26,7 @@ If no filename is given, standard input is read.
 cat example.txt | slides
 ```
 
-### Options
+### Command line options
 
 ```
 % slides -h
@@ -34,6 +34,14 @@ Usage of slides:
   -p string
     	listen on hostname:port (default "localhost:5000")
 ```
+
+### Slideshow usage
+
+Keyboard shortcuts:
+
+`Right`/`Down`/`Space`/`Left click` moves to the next slide.
+
+`Left`/`Up` moves to the previous slide.
 
 ## Syntax
 
