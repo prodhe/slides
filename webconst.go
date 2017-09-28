@@ -66,50 +66,50 @@ initSlides();
 showSlides(slideIndex);
 
 function initSlides() {
-  var i;
-  var slides = document.getElementsByTagName("section");
-  for (i = 0; i < slides.length; i++) {
-      slides[i].onclick = function (){
-        plusSlides(1);
-      };
-  }
+	var i;
+	var slides = document.getElementsByTagName("section");
+	for (i = 0; i < slides.length; i++) {
+			slides[i].onclick = function (){
+				plusSlides(1);
+			};
+	}
 }
 
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+	showSlides(slideIndex += n);
 }
 
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+	showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
-  var i;
-  var slides = document.getElementsByTagName("section");
+	var i;
+	var slides = document.getElementsByTagName("section");
 
-  if (n > slides.length-1) { slideIndex = slides.length-1; }
-  if (n < 0) { slideIndex = 0; }
+	if (n > slides.length-1) { slideIndex = slides.length-1; }
+	if (n < 0) { slideIndex = 0; }
 
-  for (i = 0; i < slides.length; i++) {
-    slides[i].classList.remove("current");
-  }
-  slides[slideIndex].classList.add("current");
+	for (i = 0; i < slides.length; i++) {
+		slides[i].classList.remove("current");
+	}
+	slides[slideIndex].classList.add("current");
 }
 
 window.onkeydown = function (e) {
-  var e=window.event || e;
-  // space, left, up, right, down: 32 37 38 39 40
-  switch (e.keyCode) {
-    case 37:
-    case 38:
-      plusSlides(-1);
-      break;
-    case 32:
-    case 39:
-    case 40:
-      plusSlides(1);
-      break;
-  }  
+	var e=window.event || e;
+	// space, left, up, right, down: 32 37 38 39 40
+	switch (e.keyCode) {
+		case 37:
+		case 38:
+			plusSlides(-1);
+			break;
+		case 32:
+		case 39:
+		case 40:
+			plusSlides(1);
+			break;
+	}	
 };
 `
 )
