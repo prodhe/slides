@@ -10,7 +10,7 @@ It also serves as a way for me to try out lexing/parsing in Go. The lexer is bas
 
 ## Syntax
 
-- Paragraphs (multiple newlines) separates slides.
+- Paragraphs (multiple newlines: `\n\n`) separates slides.
 
 - Lines beginning with `#` is a comment and will not show up in the final slide.
 
