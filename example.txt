@@ -1,26 +1,21 @@
 slides
 
-Example
-
 Every paragraph is a new slide
 
-- Monospaced
-- Block centered
 - Blanks at the beginning of a
   line will be preserved
+- Tab equals four spaces
+	1 2 3 4
 
-Indent if you like:
-	A tab
-		equals
-	four spaces
+Special characters at the beginning of a line:
+.
+\. - print empty line within a paragraph
+\# - source file comments
+\@ - include images from local folder
+\\ - escape the above or empty slide
 
-Special characters
-	# comment
-	@image.png
-
-Escape with \
-	\# comment
-	\@image.png
+# This produces an empty slide.
+\
 
 Include images using @name.png
 
@@ -37,7 +32,7 @@ UTF-8 support (emojis!)
 
 Simple and effective
 
-Shamelessly based on sent
+Shamelessly based on 'sent'
 tools.suckless.org/sent
 
 Questions?
