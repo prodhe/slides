@@ -11,7 +11,7 @@ const (
 </style>
 </head>
 <body>
-<div id="slides">
+<div id="slides" class="font-mono">
 {{data}}
 </div>
 <script>
@@ -25,7 +25,6 @@ const (
 body {
 	background-color: #ffffea;
 	font-size: 24pt;
-	font-family: monospace;
 	line-height: 1.7;
 }
 #slides {
@@ -57,6 +56,15 @@ img {
 	position: relative;
 	max-width: 100vw;
 	max-height: 100vh;
+}
+.font-mono {
+	font-family: monospace;
+}
+.font-sans {
+	font-family: sans-serif;
+}
+.font-serif {
+	font-family: serif;
 }
 `
 	JAVASCRIPT = `
@@ -96,9 +104,24 @@ function showSlides(n) {
 	slides[slideIndex].classList.add("current");
 }
 
+function cycleFont() {
+	cl = document.getElementById("slides").classList;
+	if (cl.contains("font-mono")) {
+		cl.remove("font-mono");
+		cl.add("font-sans");
+	} else if (cl.contains("font-sans")) {
+		cl.remove("font-sans")
+		cl.add("font-serif");
+	} else if (cl.contains("font-serif")) {
+		cl.remove("font-serif")
+		cl.add("font-mono");
+	}
+}
+
 window.onkeydown = function (e) {
 	var e=window.event || e;
 	// space, left, up, right, down: 32 37 38 39 40
+	// f: 70
 	switch (e.keyCode) {
 		case 37:
 		case 38:
@@ -108,6 +131,9 @@ window.onkeydown = function (e) {
 		case 39:
 		case 40:
 			plusSlides(1);
+			break;
+		case 70:
+			cycleFont();
 			break;
 	}	
 };
