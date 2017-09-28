@@ -12,6 +12,12 @@ import (
 	"github.com/prodhe/slides/parse"
 )
 
+var flagPort string
+
+func init() {
+	flag.StringVar(&flagPort, "p", "localhost:5000", "listen on hostname:port")
+}
+
 func main() {
 	flag.Parse()
 
@@ -47,8 +53,8 @@ func main() {
 
 	http.Handle("/f/", http.StripPrefix("/f/", http.FileServer(http.Dir("./"))))
 	http.Handle("/", slides(toHtml(data)))
-	fmt.Println("Slides are available at http://localhost:3001/")
-	err = http.ListenAndServe(":3001", nil)
+	fmt.Printf("Slides are available at %s\n", flagPort)
+	err = http.ListenAndServe(flagPort, nil)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

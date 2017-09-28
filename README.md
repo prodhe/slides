@@ -26,6 +26,15 @@ If no filename is given, standard input is read.
 cat example.txt | slides
 ```
 
+### Options
+
+```
+% slides -h
+Usage of slides:
+  -p string
+    	listen on hostname:port (default "localhost:5000")
+```
+
 ## Syntax
 
 - Paragraphs (multiple newlines: `\n\n`) separates slides.
