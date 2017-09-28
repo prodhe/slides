@@ -12,6 +12,8 @@ It also serves as a way for me to try out lexing/parsing in Go. The lexer is bas
 
 - Paragraphs (multiple newlines: `\n\n`) separates slides.
 
+- A dot, `.`, on a single line will create a linebreak within a paragraph.
+
 - Lines beginning with `#` is a comment and will not show up in the final slide.
 
 - Include images using `@`.
