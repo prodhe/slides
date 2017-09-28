@@ -22,23 +22,32 @@ const (
 `
 	STYLESHEET = `
 * { border: 0; margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: #ffffea; }
+body {
+	background-color: #ffffea;
+	font-size: 24pt;
+	font-family: monospace;
+	line-height: 1.7;
+}
 #slides {
 	display: flex;
 	flex-flow: row nowrap;
 }
-p {
+section {
 	display: none;
 	flex: none;
 	width: 100vw;
 	height: 100vh;
 	align-items: center;
 	justify-content: center;
-	font-size: 24pt;
-	font-family: monospace;
-	line-height: 1.7;
+	flex-flow: column wrap;
 	text-align: left;
 	padding: 1em;
+	user-select: none;
+	cursor: default;
+}
+section > div {
+	display: block;
+	position: relative;
 }
 .current {
 	display: flex;
@@ -64,7 +73,7 @@ function currentSlide(n) {
 
 function showSlides(n) {
   var i;
-  var slides = document.getElementsByTagName("p");
+  var slides = document.getElementsByTagName("section");
 //  var dots = document.getElementsByClassName("dot");
   if (n > slides.length-1) {slideIndex = slides.length-1} 
   if (n < 0) {slideIndex = 0}

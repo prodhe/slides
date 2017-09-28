@@ -15,7 +15,7 @@ func NewParser(name, input string) *Parser {
 }
 
 func (p *Parser) Parse() (string, error) {
-	str := "<p>\n"
+	str := "<section><div>\n"
 	for {
 		tok := p.l.nextToken()
 		//fmt.Printf("%s\n", tok)
@@ -30,11 +30,15 @@ func (p *Parser) Parse() (string, error) {
 				tok.val,
 			)
 		case tokenParagraphDelim:
-			str += fmt.Sprintf("\n</p>\n<p>\n")
+			str += fmt.Sprintf("\n</div></section>\n\n<section><div>\n")
 		case tokenNewline:
 			str += fmt.Sprintf("<br>\n")
 		case tokenText:
-			str += toHtml(tok.val)
+			str += fmt.Sprintf("<span>%s</span>", html.EscapeString(tok.val))
+		case tokenSpace:
+			str += "<span>&nbsp;</span>"
+		case tokenTab:
+			str += "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"
 		case tokenComment:
 			str += fmt.Sprintf("<!-- %s //-->\n", tok.val)
 		case tokenImage:
@@ -42,25 +46,9 @@ func (p *Parser) Parse() (string, error) {
 		}
 	}
 
-	str += "</p>"
+	str += "</div></section>\n"
+
+	p.l.drain()
 
 	return str, nil
-}
-
-func toHtml(s string) string {
-	var result string
-	s = html.EscapeString(s)
-Loop:
-	for i := 0; i < len(s); i++ {
-		switch s[i] {
-		case ' ':
-			result += "&nbsp;"
-		case '\t':
-			result += "&nbsp;&nbsp;&nbsp;&nbsp;"
-		default:
-			result += s[i:]
-			break Loop
-		}
-	}
-	return result
 }
