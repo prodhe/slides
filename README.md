@@ -8,6 +8,12 @@ This is pretty much a go clone of *sent* from suckless.org (https://tools.suckle
 
 It also serves as a way for me to try out lexing/parsing in Go. The lexer is based on Rob Pike's talk "Lexical Scanning in Go" ([youtube](https://www.youtube.com/watch?v=HxaD_trXwRE)) and a lot of the methods are almost direct copies of the template/parse package.
 
+## Install
+
+```
+go get -u github.com/prodhe/slides
+```
+
 ## Syntax
 
 - Paragraphs (multiple newlines: `\n\n`) separates slides.
