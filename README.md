@@ -16,8 +16,8 @@ It also serves as a way for me to try out lexing/parsing in Go. The lexer is bas
 
 - Include images using `@`.
 
-- Escape special characters at the beginning of line using `\`. This can also be used to create an empty slide.
+- Escape special characters at the beginning of a line using `\`. This can also be used to create an empty slide.
 
-- Blanks (spaces and tabs) at the beginning if a line will be preserved. Tabs equals four spaces.
+- Blanks (spaces and tabs) at the beginning of a line will be preserved. Tabs equals four spaces.
 
 See example.txt.
