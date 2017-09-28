@@ -14,6 +14,18 @@ It also serves as a way for me to try out lexing/parsing in Go. The lexer is bas
 go get -u github.com/prodhe/slides
 ```
 
+## Usage
+
+```
+slides filename.txt
+```
+
+If no filename is given, standard input is read.
+
+```
+cat example.txt | slides
+```
+
 ## Syntax
 
 - Paragraphs (multiple newlines: `\n\n`) separates slides.
